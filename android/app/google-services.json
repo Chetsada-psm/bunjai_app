@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "390781009897",
+    "project_id": "bunjai-application",
+    "storage_bucket": "bunjai-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390781009897:android:ce8178ee36712c941f5578",
+        "android_client_info": {
+          "package_name": "com.example.bunjai_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrVTsSQWSqnZ5pvutFP7iVHnet-12lw_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
