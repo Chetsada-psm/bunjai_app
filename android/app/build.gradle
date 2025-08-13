@@ -32,15 +32,12 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.bunjai_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         minSdkVersion 23
         targetSdk = flutter.targetSdkVersion
@@ -50,13 +47,50 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
     }
+
+    packaging {
+        resources {
+            // ตัดพวก license/notice และดัชนีทิ้ง
+            excludes += [
+                'META-INF/DEPENDENCIES',
+                'META-INF/LICENSE',
+                'META-INF/LICENSE.txt',
+                'META-INF/LICENSE.md',
+                'META-INF/LICENSE-notice.md',
+                'META-INF/NOTICE',
+                'META-INF/NOTICE.txt',
+                'META-INF/NOTICE.md',
+                'META-INF/ASL2.0',
+                'META-INF/AL2.0',
+                'META-INF/LGPL2.1',
+                'META-INF/INDEX.LIST'
+            ]
+
+            // ไฟล์ service/metadata บางตัวจาก lib หลายตัวอาจซ้ำกัน — เลือกไฟล์แรกไปเลย
+            pickFirsts += [
+                'META-INF/services/*',
+                'META-INF/*kotlin_module'
+            ]
+        }
+    }
+
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // บังคับใช้ Guava เวอร์ชันที่เข้ากับ AGP 8.x
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+
+// บังคับให้ทุก dependency ใช้เวอร์ชันนี้
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:31.1-jre'
+    }
 }
